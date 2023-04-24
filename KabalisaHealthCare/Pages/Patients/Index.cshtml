@@ -1,0 +1,36 @@
+﻿@page
+@model KabalisaHealthCare.Pages.Patients.IndexModel
+@{
+}
+<br/>
+<h2>List of Patients</h2>
+<a class='btn btn-primary btn-sm' href='/Patients/Create'>New Patient</a>
+<table class="table">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>NAME</th>
+            <th>EMAIL</th>
+            <th>ADDRESS</th>
+            <th>CREATED AT</th>
+            <th>ACTIONS</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.listPatients)
+        {
+            <tr>
+                <td>@item.id</td>
+                <td>@item.name</td>
+                <td>@item.email</td>
+                <td>@item.phone</td>
+                <td>@item.address</td>
+                <td>@item.createdAt</td>
+                <td>
+                    <a class="btn btn-primary btn-sm" href="/Patients/Edit?id=@item.id">Edit</a>
+                    <a class="btn btn-danger btn-sm" href="/Patients/Delete?id=@item.id">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
