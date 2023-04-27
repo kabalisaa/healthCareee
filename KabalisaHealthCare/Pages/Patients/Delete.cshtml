@@ -1,5 +1,25 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
+﻿@page
+@using System.Data.SqlClient
 @{
+    String id = Request.Query["id"];
+    try
+    {
+        String connectionString = "Data Source=KABALISA-PC\\KABALISA;Initial Catalog=kabalisaHealthCareDB;Integrated Security=True";
+        using (SqlConnection con = new SqlConnection(connectionString))
+        {
+            con.Open();
+            String sqlQuery = "DELETE FROM Patients where id=@id";
+            using (SqlCommand cmd = new SqlCommand(sqlQuery, con))
+            {
+                cmd.Parameters.AddWithValue("@id", id);
+                cmd.ExecuteNonQuery();
+
+            }
+
+        }
+    }
+    catch(Exception ex){
+        Console.WriteLine("error" + ex.Message);
+    }
+    Response.Redirect("/Patients/Index");
 }
